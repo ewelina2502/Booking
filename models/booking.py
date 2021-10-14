@@ -17,6 +17,43 @@ def delete_booking(new_booking, new_token):
     assert response_delete_booking.status_code == 201
 
 
+def put_booking(new_booking, new_token):
+    headers = {
+        "Cookie": "token=" + str(new_token)
+    }
+    body = {
+        "firstname": "Put",
+        "lastname": "Update",
+        "totalprice": 111,
+        "depositpaid": "true",
+        "bookingdates": {
+            "checkin": "2018-01-01",
+            "checkout": "2019-01-01"
+        },
+        "additionalneeds": "Breakfast"
+    }
+    response_put_booking = requests.put(f'{url.put_booking}' + '/' + str(new_booking),
+                                        headers=headers, json=body)
+    assert response_put_booking.status_code == 200
+    put_details = response_put_booking.json()
+    print(put_details)
+
+
+def patch_booking(new_booking, new_token):
+    headers = {
+        "Cookie": "token=" + str(new_token)
+    }
+    body = {
+        "firstname": "Patch",
+        "lastname": "Update"
+    }
+    response_patch_booking = requests.patch(f'{url.patch_booking}' + '/' + str(new_booking),
+                                            headers=headers, json=body)
+    assert response_patch_booking.status_code == 200
+    # patch_details = response_patch_booking.json()
+    # print(patch_details)
+
+
 def get_id_fixture(new_booking):
     response_get_id = requests.get(f'{url.get_id}' + '/' + str(new_booking))
     assert response_get_id.status_code == 200

@@ -34,6 +34,16 @@ def test_delete_newbooking(new_booking, new_token):
     delete_nb.delete_booking(new_booking, new_token)
 
 
+def test_put_booking(new_booking, new_token):
+    put_nb = booking
+    put_nb.put_booking(new_booking, new_token)
+
+
+def test_patch_booking(new_booking, new_token):
+    patch_nb = booking
+    patch_nb.patch_booking(new_booking, new_token)
+
+
 @pytest.fixture
 def new_booking():
     new_booking_one = Bookings()
