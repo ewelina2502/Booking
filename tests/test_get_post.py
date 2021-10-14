@@ -25,8 +25,10 @@ def test_get_id_details():
     get_details = response_get_id.json()['totalprice']
     firstname = response_get_id.json()['firstname']
     lastname = response_get_id.json()['lastname']
+    additionalneeds = response_get_id.json()['additionalneeds']
     print(
-        '{', '"total": ', get_details, ",", '"firstname": ', '"', firstname, '"', ",", '"lastname": ', '"', lastname, '"', '}'
+        '{', '"total": ', get_details, ",", '"firstname": ', '"', firstname, '"', ",", '"lastname": ', '"',
+        lastname, '"', ",", '"additionalneeds":', '"', additionalneeds, '"', '}'
     )
 
 

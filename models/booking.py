@@ -1,3 +1,4 @@
+import random
 import requests
 import url
 
@@ -7,7 +8,7 @@ class Bookings:
     def __init__(self):
         self.firstname = "James"
         self.lastname = "Browns"
-        self.totalprice = 1121
+        self.totalprice = random.randint(0, 1000)
         self.depositpaid = "true"
         self.checkin = "2021-01-01"
         self.checkout = "2021-01-02"
