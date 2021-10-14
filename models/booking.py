@@ -1,26 +1,35 @@
 import random
+import pytest
 import requests
 import url
 
-id_booking = 1
+
+id_booking = 2
+
+
+@pytest.fixture
+def new_booking():
+    new_booking = Bookings()
+    return new_booking.add_booking()
 
 
 def get_ids_booking():
     response_get_ids = requests.get(f'{url.get_ids}')
-    assert response_get_ids.json()
-    get_ids = response_get_ids.json()
-    print(get_ids)
+    assert response_get_ids.status_code == 200
 
 
-def test_get_id():
-    response_get_id = requests.get(f'{url.get_id}' + f'{id_booking}')
-    assert response_get_id.json()
-    get_id = response_get_id.json()
-    print(get_id)
+def get_id():
+    response_get_id = requests.get(f'{url.get_id}' + '/' + f'{id_booking}')
+    assert response_get_id.status_code == 200
 
 
-def test_get_id_details():
-    response_get_id = requests.get(f'{url.get_id}' + f'{id_booking}')
+def get_id_fixture(new_booking):
+    response_get_id = requests.get(f'{url.get_id}' + str(new_booking))
+    assert response_get_id.status_code == 200
+
+
+def get_id_details():
+    response_get_id = requests.get(f'{url.get_id}' + '/' + f'{id_booking}')
     assert response_get_id.status_code == 200
     get_details = response_get_id.json()['totalprice']
     firstname = response_get_id.json()['firstname']
@@ -57,5 +66,4 @@ class Bookings:
 
         response_add_booking = requests.post(url.post_add_booking, json=body)
         assert response_add_booking.status_code == 200
-        add_booking = response_add_booking.json()['bookingid']
-        print(add_booking)
+        return response_add_booking.json()['bookingid']
