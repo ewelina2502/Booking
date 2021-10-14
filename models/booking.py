@@ -2,17 +2,19 @@ import random
 import requests
 import url
 
-id_booking = 2
-
-
-def get_id():
-    response_get_id = requests.get(f'{url.get_id}' + '/' + f'{id_booking}')
-    assert response_get_id.status_code == 200
-
 
 def get_ids_booking():
     response_get_ids = requests.get(f'{url.get_ids}')
     assert response_get_ids.status_code == 200
+
+
+def delete_booking(new_booking, new_token):
+    headers = {
+        "Cookie": "token=" + str(new_token)
+    }
+    response_delete_booking = requests.delete(f'{url.delete_newbooking}' + '/' + str(new_booking),
+                                              headers=headers)
+    assert response_delete_booking.status_code == 201
 
 
 def get_id_fixture(new_booking):
@@ -64,3 +66,15 @@ class Bookings:
         id_numer = response_add_booking.json()['bookingid']
         print('{', '"id_numer": ', '"', id_numer, '}')
         return response_add_booking.json()['bookingid']
+
+
+def get_token():
+    body = {
+        "username": "admin",
+        "password": "password123"
+    }
+    response_get_token = requests.post(url.url_token, json=body)
+    assert response_get_token.status_code == 200
+    token = response_get_token.json()
+    print(token)
+    return response_get_token.json()['token']
