@@ -7,12 +7,6 @@ import url
 id_booking = 2
 
 
-@pytest.fixture
-def new_booking():
-    new_booking = Bookings()
-    return new_booking.add_booking()
-
-
 def get_ids_booking():
     response_get_ids = requests.get(f'{url.get_ids}')
     assert response_get_ids.status_code == 200
@@ -24,7 +18,7 @@ def get_id():
 
 
 def get_id_fixture(new_booking):
-    response_get_id = requests.get(f'{url.get_id}' + str(new_booking))
+    response_get_id = requests.get(f'{url.get_id}' + '/' + str(new_booking))
     assert response_get_id.status_code == 200
 
 
