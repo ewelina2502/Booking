@@ -1,8 +1,16 @@
 import random
 from datetime import date, timedelta
-
+from faker import Faker
 import requests
 import url
+
+fake = Faker()
+
+date_today = date.today()
+date_checkout = date.today() + timedelta(days=10)
+
+firstnames = ("Ewelina", "Adam", "Mikołaj")
+lastnames = ("Brown", "Blue", "Orange")
 
 
 def get_ids_booking():
@@ -29,10 +37,10 @@ def put_booking(new_booking, new_token):
         "totalprice": 111,
         "depositpaid": "true",
         "bookingdates": {
-            "checkin": "2018-01-01",
-            "checkout": "2019-01-01"
+            "checkin": str(f'{date_today}'),
+            "checkout": str(f'{date_checkout}')
         },
-        "additionalneeds": "Breakfast"
+        "additionalneeds": 'Break',
     }
     response_put_booking = requests.put(f'{url.put_booking}' + '/' + str(new_booking),
                                         headers=headers, json=body)
@@ -46,12 +54,14 @@ def patch_booking(new_booking, new_token):
         "Cookie": "token=" + str(new_token)
     }
     body = {
-        "firstname": "Patch",
-        "lastname": "Update"
+        "firstname": 'update',
+        "lastname": 'patch'
     }
     response_patch_booking = requests.patch(f'{url.patch_booking}' + '/' + str(new_booking),
                                             headers=headers, json=body)
     assert response_patch_booking.status_code == 200
+    patch_details = response_patch_booking.json()
+    print(patch_details)
 
 
 def get_id_fixture(new_booking):
@@ -70,13 +80,6 @@ def get_id_details_from_fixture(new_booking):
         ",", '"lastname": ', '"', lastname, '"',
         ",", '"additionalneeds":', '"', additionalneeds, '"', '}'
     )
-
-
-firstnames = ("Ewelina", "Adam", "Mikołaj")
-lastnames = ("Brown", "Blue", "Orange")
-
-date_today = date.today()
-date_checkout = date.today() + timedelta(days=10)
 
 
 class Bookings:
