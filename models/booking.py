@@ -1,4 +1,6 @@
 import random
+from datetime import date, timedelta
+
 import requests
 import url
 
@@ -50,8 +52,6 @@ def patch_booking(new_booking, new_token):
     response_patch_booking = requests.patch(f'{url.patch_booking}' + '/' + str(new_booking),
                                             headers=headers, json=body)
     assert response_patch_booking.status_code == 200
-    # patch_details = response_patch_booking.json()
-    # print(patch_details)
 
 
 def get_id_fixture(new_booking):
@@ -66,12 +66,17 @@ def get_id_details_from_fixture(new_booking):
     lastname = response_get_id.json()['lastname']
     additionalneeds = response_get_id.json()['additionalneeds']
     print(
-        '{', '"firstname": ', '"', firstname, '"', ",", '"lastname": ', '"',
-        lastname, '"', ",", '"additionalneeds":', '"', additionalneeds, '"', '}')
+        '{', '"firstname": ', '"', firstname, '"',
+        ",", '"lastname": ', '"', lastname, '"',
+        ",", '"additionalneeds":', '"', additionalneeds, '"', '}'
+    )
 
 
 firstnames = ("Ewelina", "Adam", "Mikołaj")
 lastnames = ("Brown", "Blue", "Orange")
+
+date_today = date.today()
+date_checkout = date.today() + timedelta(days=10)
 
 
 class Bookings:
@@ -79,10 +84,10 @@ class Bookings:
     def __init__(self, fnames=firstnames, lnames=lastnames):
         self.firstname = str(random.choice(fnames))
         self.lastname = str(random.choice(lnames))
-        self.totalprice = random.randint(0, 1000)
+        self.totalprice = random.randint(0, 2000)
         self.depositpaid = "true"
-        self.checkin = "2021-01-01"
-        self.checkout = "2021-01-02"
+        self.checkin = str(f'{date_today}')
+        self.checkout = str(f'{date_checkout}')
         self.additionalneeds = "Breakfast"
 
     def add_booking(self):
