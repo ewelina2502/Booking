@@ -14,7 +14,7 @@ def test_get_id_fixture(new_booking):
     get_id_fixture.get_id_fixture(new_booking)
 
 
-def test_get_id_details_from_fixture(new_booking):
+def test_get_id_details_from_fixture_return_json(new_booking):
     get_id_details = booking
     get_id_details.get_id_details_from_fixture(new_booking)
 

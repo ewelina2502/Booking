@@ -75,10 +75,16 @@ def get_id_details_from_fixture(new_booking):
     firstname = response_get_id.json()['firstname']
     lastname = response_get_id.json()['lastname']
     additionalneeds = response_get_id.json()['additionalneeds']
+    bookingdates_checkin = response_get_id.json()['bookingdates']['checkin']
+    bookingdates_data = response_get_id.json()['bookingdates']
+
     print(
         '{', '"firstname": ', '"', firstname, '"',
         ",", '"lastname": ', '"', lastname, '"',
-        ",", '"additionalneeds":', '"', additionalneeds, '"', '}'
+        ",", '"additionalneeds":', '"', additionalneeds, '"',
+        ",", '"bookingdates_checkin":', '"', bookingdates_checkin, '"',
+        ",", '"bookingdatesdata":', '"', bookingdates_data, '"',
+        '}'
     )
 
 
