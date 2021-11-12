@@ -3,6 +3,7 @@ from datetime import date, timedelta
 from faker import Faker
 import requests
 import url
+from models.lower_upper import example_name
 
 fake = Faker()
 
@@ -32,9 +33,9 @@ def put_booking(new_booking, new_token):
         "Cookie": "token=" + str(new_token)
     }
     body = {
-        "firstname": "Put",
+        "firstname": str(f'{example_name}'),
         "lastname": "Update",
-        "totalprice": 111,
+        "totalprice": int(random.randint(99, 999)),
         "depositpaid": "true",
         "bookingdates": {
             "checkin": str(f'{date_today}'),
