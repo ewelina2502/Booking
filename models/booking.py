@@ -80,10 +80,10 @@ def get_id_details_from_fixture(new_booking):
     bookingdates_data = response_get_id.json()['bookingdates']
 
     print(
-        '{', '"firstname": ', '"', firstname, '"',
-        ",", '"lastname": ', '"', lastname, '"',
-        ",", '"additionalneeds":', '"', additionalneeds, '"',
-        ",", '"bookingdates_checkin":', '"', bookingdates_checkin, '"',
+        '{', '"firstname": ', '"' + firstname + '"',
+        ",", '"lastname": ', '"' + lastname + '"',
+        ",", '"additionalneeds":', '"' + additionalneeds + '"',
+        ",", '"bookingdates_checkin":', '"' + bookingdates_checkin + '"',
         ",", '"bookingdatesdata":', '"', bookingdates_data, '"',
         '}'
     )
