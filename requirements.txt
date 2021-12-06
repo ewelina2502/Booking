@@ -3,3 +3,4 @@ request
 pytest~=6.2.5
 
 Faker~=9.5.2
+pesel~=0.3.1
