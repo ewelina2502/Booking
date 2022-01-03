@@ -1,6 +1,6 @@
 import random
 
-men = 10
+men = 5
 
 pesel_list = []
 
