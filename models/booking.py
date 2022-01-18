@@ -116,7 +116,7 @@ class Bookings:
         response_add_booking = requests.post(url.post_add_booking, json=body)
         assert response_add_booking.status_code == 200
         id_numer = response_add_booking.json()['bookingid']
-        print('{', '"id_numer": ', '"', id_numer, '}')
+        print('{', '"id_numer": ', '"', id_numer, '"', '}')
         return response_add_booking.json()['bookingid']
 
 
