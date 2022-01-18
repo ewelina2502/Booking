@@ -1,11 +1,9 @@
 from datetime import date, datetime
 
 date_today = date.today()
-print(date_today)
-
+print("date =", date_today)
 
 now = datetime.now()
-
 dt_string = now.strftime("%d-%m-%Y %H:%M:%S")
 print("date and time =", dt_string)
 
